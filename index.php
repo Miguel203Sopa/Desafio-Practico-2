@@ -4,269 +4,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario de Repuestos - Dark Edition</title>
+    <title>Inventario de Repuestos - Dark Purple</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Dark & Purple */
-            --bg-body: #121212;          /* Fondo muy oscuro, no negro puro */
-            --bg-card: #1e1e1e;          /* Fondo de tarjetas y formulario */
-            --bg-input: #2a2a2a;         /* Fondo de inputs */
-            
-            --text-main: #e0e0e0;        /* Texto principal */
-            --text-muted: #a0a0a0;       /* Texto secundario */
-            
-            --primary: #9d4edd;          /* Morado principal brillante */
-            --primary-hover: #7b2cbf;    /* Morado más oscuro para hover */
-            --border-color: #333333;     /* Bordes sutiles */
-            
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #a855f7;
+            --primary-hover: #c084fc;
+            --border-color: #334155;
+            --danger: #ef4444;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg-body);
             color: var(--text-main);
             padding: 40px 20px;
-            line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1100px; margin: 0 auto; }
+        h2 { margin-bottom: 24px; font-weight: 600; font-size: 28px; color: #fff; }
 
-        h2 {
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 24px;
-            font-size: 28px;
-            letter-spacing: -0.5px;
-        }
-
-        /* --- FORMULARIO MINIMALISTA --- */
-        form {
+        /* Formulario */
+        form.main-form {
             background: var(--bg-card);
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: var(--shadow);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin-bottom: 40px;
             border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        form:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(157, 78, 221, 0.1); /* Brillo morado sutil */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
 
         input {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: var(--bg-input);
+            padding: 12px;
+            background: var(--bg-input);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            font-size: 14px;
-            color: var(--text-main);
-            transition: all 0.2s ease;
+            color: white;
             outline: none;
+            transition: 0.3s;
         }
 
-        input::placeholder {
-            color: #666;
-        }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2); }
 
-        input:focus {
-            border-color: var(--primary);
-            background-color: #2d2d2d;
-            box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.2);
-        }
-
-        /* Ajuste para inputs específicos */
-        input[type="date"] {
-            color: var(--text-muted);
-        }
-
-        button {
-            background-color: var(--primary);
+        button.btn-add {
+            grid-column: 1 / -1;
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 14px;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 15px;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            grid-column: 1 / -1; /* Ocupa todo el ancho al final */
-            margin-top: 10px;
+            transition: 0.3s;
         }
 
-        button:hover {
-            background-color: var(--primary-hover);
-        }
+        button.btn-add:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* --- TABLA MODERNA DARK --- */
+        /* Tabla */
         .table-container {
             background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: var(--shadow);
             overflow: hidden;
             border: 1px solid var(--border-color);
         }
 
-        table { 
-            border-collapse: collapse; 
-            width: 100%; 
-            text-align: left;
-            font-size: 15px;
-        }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #1e293b; color: var(--primary); padding: 15px; text-align: left; font-size: 13px; text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        tr:hover { background: rgba(168, 85, 247, 0.05); cursor: pointer; }
 
-        th { 
-            background-color: #252525; /* Ligeramente más claro que la tarjeta */
-            color: var(--primary); /* Cabeceras moradas */
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 18px 16px;
-        }
-
-        td { 
-            padding: 16px; 
-            border-bottom: 1px solid var(--border-color); 
-            color: var(--text-main);
-        }
-
-        tr {
-            transition: background-color 0.2s ease;
-            cursor: pointer;
-        }
-
-        tr:hover {
-            background-color: rgba(157, 78, 221, 0.05); /* Fondo morado muy tenue */
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .action-link {
-            color: #ff5252; /* Rojo brillante para contraste en modo oscuro */
+        /* Botones Acción */
+        .btn-accion {
+            padding: 6px 12px;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .action-link:hover {
-            color: #ff1744;
-            text-decoration: underline;
-        }
-
-        /* --- MODAL CON ANIMACIÓN (DARK) --- */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            background: rgba(0, 0, 0, 0.8); /* Fondo negro opaco */
-            backdrop-filter: blur(5px); /* Desenfoque moderno */
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.show {
-            opacity: 1;
-        }
-
-        .contenido { 
-            background: var(--bg-card); 
-            margin: 10% auto; 
-            padding: 35px; 
-            width: 90%;
-            max-width: 450px; 
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            position: relative;
-            transform: translateY(-30px);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto rebote suave */
-            border: 1px solid var(--primary); /* Borde morado */
-        }
-
-        .modal.show .contenido {
-            transform: translateY(0);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 18px;
-            right: 20px;
-            cursor: pointer;
-            color: var(--text-muted);
-            font-size: 22px;
-            transition: color 0.2s;
-        }
-
-        .close-btn:hover {
-            color: var(--primary);
-        }
-
-        #m_nombre {
-            margin-top: 0; 
-            color: #ffffff; 
-            font-size: 22px; 
-            margin-bottom: 10px;
-            border-bottom: 2px solid var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.2s;
             display: inline-block;
-            padding-bottom: 5px;
         }
+        .btn-edit { color: var(--primary); border: 1px solid var(--primary); margin-right: 5px; }
+        .btn-edit:hover { background: var(--primary); color: white; }
+        .btn-delete { color: var(--danger); border: 1px solid var(--danger); }
+        .btn-delete:hover { background: var(--danger); color: white; }
 
-        #m_desc {
-            color: var(--text-muted); 
-            line-height: 1.6;
-            font-size: 15px;
-            margin-bottom: 20px;
+        /* Modal */
+        .modal { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 100;
         }
-
-        #m_img {
-            width: 100%;
-            height: auto;
-            max-height: 250px;
-            border-radius: 8px;
-            object-fit: contain; /* Muestra la imagen completa */
-            display: none; 
-            background-color: #121212;
-            padding: 5px;
-            border: 1px solid var(--border-color);
+        .contenido { 
+            background: var(--bg-card); margin: 10% auto; padding: 30px; width: 400px; 
+            border-radius: 16px; position: relative; border: 1px solid var(--primary);
+            transform: scale(0.9); transition: 0.3s;
         }
-
-        /* Scrollbar personalizado morado */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-body);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
+        .modal.show .contenido { transform: scale(1); }
+        .close { position: absolute; right: 20px; top: 15px; cursor: pointer; color: var(--text-muted); }
+        #m_img { width: 100%; border-radius: 8px; margin-top: 15px; display: none; border: 1px solid var(--border-color); }
     </style>
 </head>
 <body>
@@ -274,49 +117,41 @@
 <div class="container">
     <h2>Inventario de Repuestos</h2>
 
-    <form action="insertar.php" method="POST">
-        <input type="text" name="codigo" placeholder="Código único" required>
-        <input type="text" name="nombre_repuesto" placeholder="Nombre del repuesto" required>
-        <input type="text" name="descripcion" placeholder="Descripción breve">
+    <form action="insertar.php" method="POST" class="main-form">
+        <input type="text" name="codigo" placeholder="Código" required>
+        <input type="text" name="nombre_repuesto" placeholder="Nombre" required>
+        <input type="text" name="descripcion" placeholder="Descripción">
         <input type="text" name="marca" placeholder="Marca">
-        <input type="text" name="modelo_compatible" placeholder="Modelo Compatible">
-        <input type="number" name="cantidad_stock" placeholder="Cantidad">
+        <input type="text" name="modelo_compatible" placeholder="Modelo">
+        <input type="number" name="cantidad_stock" placeholder="Stock">
         <input type="number" step="0.01" name="precio_unitario" placeholder="Precio ($)">
         <input type="text" name="proveedor" placeholder="Proveedor">
-        <input type="text" name="ubicacion" placeholder="Pasillo/Estante">
-        <input type="date" name="fecha_ingreso" title="Fecha de Ingreso">
+        <input type="text" name="ubicacion" placeholder="Ubicación">
+        <input type="date" name="fecha_ingreso">
         <input type="url" name="fotografia_url" placeholder="URL de la imagen (https://...)">
-        <button type="submit">Guardar en Inventario</button>
+        <button type="submit" class="btn-add">Agregar al Inventario</button>
     </form>
 
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Cant.</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
+                    <th>Código</th><th>Nombre</th><th>Stock</th><th>Precio</th><th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $resultado = $conexion->query("SELECT * FROM inventario_repuestos");
-
-                if(!$resultado){
-                    die("Error en consulta: " . $conexion->error);
-                }
-
                 while($row = $resultado->fetch_assoc()){
                 ?>
                 <tr onclick='verDetalle(<?php echo htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8'); ?>)'>
-                    <td style="color: var(--primary); font-weight: 500;"><?php echo htmlspecialchars($row['codigo']); ?></td>
-                    <td><?php echo htmlspecialchars($row['nombre_repuesto']); ?></td>
-                    <td><?php echo htmlspecialchars($row['cantidad_stock']); ?></td>
+                    <td style="color:var(--primary); font-weight:600;"><?php echo $row['codigo']; ?></td>
+                    <td><?php echo $row['nombre_repuesto']; ?></td>
+                    <td><?php echo $row['cantidad_stock']; ?></td>
                     <td>$<?php echo number_format($row['precio_unitario'], 2); ?></td>
                     <td onclick="event.stopPropagation();">
-                        <a href="eliminar.php?id=<?php echo urlencode($row['codigo']); ?>" class="action-link">Eliminar</a>
+                        <a href="editar.php?codigo=<?php echo $row['codigo']; ?>" class="btn-accion btn-edit">Editar</a>
+                        <a href="eliminar.php?id=<?php echo $row['codigo']; ?>" class="btn-accion btn-delete" onclick="return confirm('¿Eliminar?')">Eliminar</a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -327,47 +162,32 @@
 
 <div id="modal" class="modal">
     <div class="contenido">
-        <span class="close-btn" onclick="cerrar()">✕</span>
-        <h3 id="m_nombre"></h3>
-        <p id="m_desc"></p>
-        <img id="m_img" alt="Vista del repuesto">
+        <span class="close" onclick="cerrar()">✕</span>
+        <h3 id="m_nombre" style="color:var(--primary);"></h3>
+        <p id="m_desc" style="color:var(--text-muted); margin: 10px 0;"></p>
+        <img id="m_img" src="">
     </div>
 </div>
 
 <script>
 function verDetalle(data){
-    document.getElementById("m_nombre").innerText = data.nombre_repuesto || "Sin nombre";
-    document.getElementById("m_desc").innerText = data.descripcion || "No hay descripción disponible para este artículo.";
+    document.getElementById("m_nombre").innerText = data.nombre_repuesto;
+    document.getElementById("m_desc").innerText = data.descripcion || "Sin descripción.";
+    const img = document.getElementById("m_img");
+    if(data.fotografia_url) {
+        img.src = data.fotografia_url;
+        img.style.display = "block";
+    } else { img.style.display = "none"; }
     
-    const imgElement = document.getElementById("m_img");
-    
-    if(data.fotografia_url && data.fotografia_url.trim() !== "") {
-        imgElement.src = data.fotografia_url;
-        imgElement.style.display = "block";
-    } else {
-        imgElement.style.display = "none";
-        imgElement.src = "";
-    }
-
-    const modal = document.getElementById("modal");
-    modal.style.display = "block";
-    setTimeout(() => modal.classList.add("show"), 10);
+    const m = document.getElementById("modal");
+    m.style.display = "block";
+    setTimeout(()=> m.classList.add("show"), 10);
 }
-
 function cerrar(){
-    const modal = document.getElementById("modal");
-    modal.classList.remove("show");
-    setTimeout(() => modal.style.display = "none", 300);
-}
-
-// Cerrar modal si se hace clic fuera del contenido
-window.onclick = function(event) {
-    const modal = document.getElementById("modal");
-    if (event.target == modal) {
-        cerrar();
-    }
+    const m = document.getElementById("modal");
+    m.classList.remove("show");
+    setTimeout(()=> m.style.display = "none", 300);
 }
 </script>
-
 </body>
 </html>
