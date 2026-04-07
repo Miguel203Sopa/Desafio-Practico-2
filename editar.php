@@ -83,6 +83,8 @@ $data = $result->fetch_assoc();
         <input type="text" name="proveedor" placeholder="Proveedor" value="<?php echo $data['proveedor']; ?>">
         <input type="text" name="ubicacion" placeholder="Ubicación" value="<?php echo $data['ubicacion']; ?>">
         <input type="date" name="fecha_ingreso" value="<?php echo $data['fecha_ingreso']; ?>">
+        <input type="url" name="fotografia_url" placeholder="URL de la imagen" value="<?php echo $data['fotografia_url']; ?>">
+        
 
         <button type="submit">Actualizar</button>
     </form>
